@@ -1,9 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Forum&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&family=Forum&display=swap");
 @import "tailwindcss";
+
+/* Adobe Devanagari Regular via Typekit kit olu4rxt — loaded in layout.tsx */
 
 @theme inline {
   --font-heading: "Forum", Georgia, serif;
   --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-samraya: "adobe-devanagari", sans-serif;
+  --font-tagline: "Plus Jakarta Sans", system-ui, sans-serif;
+  --color-charcoal: #111111;
+  --color-gold: #c6a86a;
+  --color-border: #e5e7eb;
+  --color-muted: #f9fafb;
+
+  /* Footer — white */
+  --footer-bg-r: 255;
+  --footer-bg-g: 255;
+  --footer-bg-b: 255;
+  --footer-bg-opacity: 1;
 }
 
 body {
@@ -19,4 +33,129 @@ body {
 
 .font-body {
   font-family: var(--font-body);
+}
+
+.font-samraya {
+  font-family: var(--font-samraya);
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-tagline {
+  font-family: var(--font-tagline);
+  font-weight: 300;
+  font-style: normal;
+}
+
+.site-header--scrolled .site-header__logo,
+.site-header--scrolled .site-header__contact {
+  color: #543119 !important;
+}
+.site-header--scrolled .site-header__nav-link {
+  color: #111111 !important;
+}
+@media (hover: hover) and (pointer: fine) {
+  .site-header--scrolled .site-header__nav-link:hover {
+    color: rgb(17 17 17 / 0.7) !important;
+  }
+  .site-header--scrolled .site-header__contact:hover {
+    color: rgb(84 49 25 / 0.65) !important;
+  }
+}
+
+footer.site-footer {
+  background-color: rgb(
+    var(--footer-bg-r) var(--footer-bg-g) var(--footer-bg-b) /
+      var(--footer-bg-opacity)
+  ) !important;
+}
+
+.hero-image-edge-fade {
+  background: linear-gradient(
+    to top,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.75) 6%,
+    rgba(255, 255, 255, 0.28) 14%,
+    transparent 22%
+  );
+}
+
+@keyframes hero-wordmark-swipe {
+  from {
+    opacity: 0.08;
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    opacity: 1;
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+
+.hero-wordmark {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 28%,
+    transparent 62%
+  );
+  mask-image: linear-gradient(90deg, #000 0%, #000 28%, transparent 62%);
+  -webkit-mask-size: 340% 100%;
+  mask-size: 340% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  will-change: mask-position, -webkit-mask-position, opacity;
+}
+
+.hero-wordmark--hidden {
+  opacity: 0;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+}
+
+.hero-wordmark--swipe {
+  animation: hero-wordmark-swipe 4.2s cubic-bezier(0.37, 0, 0.2, 1) forwards;
+}
+
+.hero-wordmark--shown {
+  opacity: 1;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+@keyframes hero-tagline-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-tagline {
+  opacity: 0;
+  transform: translateY(0.4rem);
+}
+
+.hero-tagline--in {
+  animation: hero-tagline-fade-in 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-wordmark--swipe {
+    animation: none;
+    opacity: 1;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .hero-tagline,
+  .hero-tagline--in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
