@@ -71,10 +71,15 @@ const SOCIAL_ICONS = {
   youtube: YouTubeIcon,
 } as const;
 
+const brandLinkClass =
+  "inline-flex h-8 max-w-[9.5rem] shrink items-center justify-center opacity-65 transition-opacity duration-300 touch-manipulation hover:opacity-90 sm:h-9 sm:max-w-[11rem] md:h-10 md:max-w-[12.5rem]";
+
+const brandImageClass = "h-full w-auto max-w-full object-contain object-center";
+
 export function Footer({ className }: { className?: string }) {
   return (
     <footer
-      className={`site-footer relative overflow-hidden py-16 sm:py-20${className ? ` ${className}` : ""}`}
+      className={`site-footer relative overflow-hidden py-12 sm:py-16 md:py-20${className ? ` ${className}` : ""}`}
     >
       <div
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
@@ -85,14 +90,14 @@ export function Footer({ className }: { className?: string }) {
           alt=""
           width={1082}
           height={1082}
-          className="h-[min(110vw,36rem)] w-[min(110vw,36rem)] object-contain opacity-10 sm:h-[42rem] sm:w-[42rem] md:h-[48rem] md:w-[48rem]"
-          sizes="(max-width: 640px) 110vw, 768px"
+          className="h-[min(100vw,28rem)] w-[min(100vw,28rem)] object-contain opacity-10 sm:h-[min(90vw,40rem)] sm:w-[min(90vw,40rem)] md:h-[48rem] md:w-[48rem]"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 768px"
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex max-w-[1200px] flex-col items-center px-6 text-center">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center px-4 text-center sm:px-6 lg:px-10">
         <nav className="w-full" aria-label="Legal">
-          <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-5">
+          <ul className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:gap-x-5">
             <li>
               <a
                 href={`${GHD_CORPORATE_SITE}/privacy`}
@@ -102,7 +107,7 @@ export function Footer({ className }: { className?: string }) {
                 Privacy Policy
               </a>
             </li>
-            <li aria-hidden className="text-charcoal/40">
+            <li aria-hidden className="select-none text-charcoal/40">
               |
             </li>
             <li>
@@ -117,16 +122,16 @@ export function Footer({ className }: { className?: string }) {
           </ul>
         </nav>
 
-        <div className="relative mt-6 flex max-w-full items-center justify-center sm:mt-8">
+        <div className="relative mt-6 w-full sm:mt-8 md:mt-10">
           <span
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[170%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(250,247,240,0.95)_0%,rgba(250,247,240,0.72)_45%,transparent_72%)]"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[160%] w-[min(100%,28rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(250,247,240,0.95)_0%,rgba(250,247,240,0.72)_45%,transparent_72%)] sm:w-[min(100%,36rem)]"
             aria-hidden
           />
 
-          <div className="relative z-10 flex items-center justify-center gap-6 sm:gap-10 md:gap-14">
+          <div className="relative z-10 flex w-full flex-col items-center gap-5 sm:flex-row sm:justify-center sm:gap-8 md:gap-12 lg:gap-14">
             <a
               href={GHD_CORPORATE_SITE}
-              className="w-[min(40vw,9.5rem)] shrink-0 sm:w-[11.5rem] md:w-[13.5rem]"
+              className="w-[min(58vw,10.5rem)] shrink-0 sm:w-[min(36vw,11.5rem)] md:w-[13.5rem]"
               aria-label="GHD Hotels home"
               rel="noopener noreferrer"
             >
@@ -136,23 +141,27 @@ export function Footer({ className }: { className?: string }) {
                 width={1160}
                 height={420}
                 className="h-auto w-full object-contain object-center drop-shadow-[0_6px_18px_rgba(84,49,25,0.22)]"
-                sizes="(max-width: 640px) 40vw, 216px"
+                sizes="(max-width: 640px) 58vw, (max-width: 768px) 36vw, 216px"
                 priority
               />
             </a>
 
+            <span
+              className="h-px w-12 shrink-0 bg-black/15 sm:hidden"
+              aria-hidden
+            />
             <span
               className="hidden h-10 w-px shrink-0 bg-black/15 sm:block sm:h-12 md:h-14"
               aria-hidden
             />
 
             <div
-              className="flex items-center gap-3 sm:gap-4 md:gap-5"
+              className="flex w-full max-w-[22rem] flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:w-auto sm:max-w-[28rem] sm:gap-x-5 md:max-w-none md:gap-x-6"
               aria-label="GHD Hotels brands"
             >
               <Link
                 href="/"
-                className="h-8 w-auto shrink-0 opacity-65 transition-opacity duration-300 touch-manipulation hover:opacity-90 sm:h-9 md:h-10"
+                className={brandLinkClass}
                 aria-label="Samrāya by GHD Hotels"
               >
                 <Image
@@ -160,14 +169,14 @@ export function Footer({ className }: { className?: string }) {
                   alt="Samrāya — A unit of GHD Hotels"
                   width={2171}
                   height={724}
-                  className="h-full w-auto object-contain object-center"
-                  sizes="(max-width: 640px) 120px, 160px"
+                  className={brandImageClass}
+                  sizes="(max-width: 640px) 42vw, 160px"
                 />
               </Link>
 
               <a
                 href="https://celestra.ghdhotels.in"
-                className="h-7 w-auto shrink-0 opacity-65 transition-opacity duration-300 touch-manipulation hover:opacity-90 sm:h-8 md:h-9"
+                className={`${brandLinkClass} h-7 sm:h-8 md:h-9`}
                 aria-label="Celéstra by GHD Hotels"
                 rel="noopener noreferrer"
               >
@@ -176,14 +185,14 @@ export function Footer({ className }: { className?: string }) {
                   alt="Celéstra by GHD Hotels"
                   width={932}
                   height={255}
-                  className="h-full w-auto object-contain object-center"
-                  sizes="(max-width: 640px) 100px, 140px"
+                  className={brandImageClass}
+                  sizes="(max-width: 640px) 38vw, 140px"
                 />
               </a>
 
               <a
                 href="https://nivaara.ghdhotels.in"
-                className="h-9 w-auto shrink-0 opacity-65 transition-opacity duration-300 touch-manipulation hover:opacity-90 sm:h-11 md:h-12"
+                className={`${brandLinkClass} h-9 sm:h-11 md:h-12`}
                 aria-label="Nivaãra by GHD Hotels"
                 rel="noopener noreferrer"
               >
@@ -192,15 +201,15 @@ export function Footer({ className }: { className?: string }) {
                   alt="Nivaãra by GHD Hotels"
                   width={736}
                   height={510}
-                  className="h-full w-auto object-contain object-center"
-                  sizes="(max-width: 640px) 56px, 72px"
+                  className={brandImageClass}
+                  sizes="(max-width: 640px) 28vw, 72px"
                 />
               </a>
             </div>
           </div>
         </div>
 
-        <ul className="mt-5 flex items-center justify-center gap-5 sm:mt-6 sm:gap-6">
+        <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:mt-8 sm:gap-x-6">
           {FOOTER_SOCIAL.map((social) => {
             const Icon = SOCIAL_ICONS[social.icon];
 
@@ -211,7 +220,7 @@ export function Footer({ className }: { className?: string }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="inline-flex text-charcoal transition-[color,opacity] duration-300 hover:text-[#543119]"
+                  className="inline-flex size-9 items-center justify-center text-charcoal transition-[color,opacity] duration-300 hover:text-[#543119] sm:size-10"
                 >
                   <Icon className="size-4 sm:size-[18px]" />
                 </a>
@@ -220,7 +229,7 @@ export function Footer({ className }: { className?: string }) {
           })}
         </ul>
 
-        <div className="mt-8 w-full border-t border-charcoal/15 pt-6 sm:mt-10 sm:pt-7">
+        <div className="mt-8 w-full border-t border-charcoal/15 pt-5 sm:mt-10 sm:pt-7">
           <p className="font-body text-[8px] font-normal tracking-[0.03em] text-charcoal/75 sm:text-[9px]">
             © 2026 GHD Hotels. All Rights Reserved.
           </p>
