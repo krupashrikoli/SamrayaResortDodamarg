@@ -8,12 +8,13 @@ export function ContactSection() {
     <section id="contact" className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-[1100px] px-6 lg:px-10">
         <div className="max-w-2xl">
-          <h2 className="font-heading text-[2rem] leading-[1.15] text-charcoal sm:text-[2.5rem]">
+          <h2 className="font-heading text-[2rem] leading-[1.15] text-charcoal sm:text-[2.75rem]">
             Get in touch
           </h2>
           <p className="mt-4 font-body text-base font-light leading-relaxed text-[#6b7280]">
-            Reach the Samrāya team for reservations and enquiries, or register
-            your interest below.
+            Reach the{" "}
+            <span className="font-samraya text-[1.05em]">Samrāya</span> team for
+            reservations and enquiries, or register your interest below.
           </p>
         </div>
 

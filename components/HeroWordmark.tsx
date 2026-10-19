@@ -59,7 +59,7 @@ export function HeroWordmark() {
       </div>
 
       <p
-        className={`font-body absolute left-1/2 top-[calc(50%+14rem)] w-full max-w-[40rem] -translate-x-1/2 px-4 text-center text-[clamp(1rem,2.6vw,1.25rem)] font-semibold uppercase leading-[1.5] tracking-[0.22em] text-white/90 antialiased drop-shadow-[0_2px_18px_rgba(0,0,0,0.4)] sm:top-[calc(50%+16rem)] md:top-[calc(50%+18rem)] ${
+        className={`font-tagline absolute left-1/2 top-[calc(50%+14rem)] w-full max-w-[40rem] -translate-x-1/2 px-4 text-center text-[clamp(1rem,2.6vw,1.25rem)] font-medium uppercase leading-[1.5] tracking-[0.22em] text-white/90 antialiased drop-shadow-[0_2px_18px_rgba(0,0,0,0.4)] sm:top-[calc(50%+16rem)] md:top-[calc(50%+18rem)] ${
           reduceMotion || taglineVisible
             ? "hero-tagline hero-tagline--in"
             : "hero-tagline"

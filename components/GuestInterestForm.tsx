@@ -146,8 +146,9 @@ export function GuestInterestForm() {
           Thank you
         </h3>
         <p className="mt-3 font-body text-sm font-light leading-relaxed text-[#6b7280]">
-          Your Samrāya guest enquiry has been sent successfully. Our team will
-          be in touch shortly.
+          Your{" "}
+          <span className="font-samraya text-[1.05em]">Samrāya</span> guest
+          enquiry has been sent successfully. Our team will be in touch shortly.
         </p>
         <button
           type="button"
@@ -163,7 +164,8 @@ export function GuestInterestForm() {
   return (
     <div className="border border-[#E5E5E5] bg-white p-6 shadow-[0_8px_30px_rgba(17,17,17,0.06)] sm:p-8">
       <h3 className="font-heading text-xl text-charcoal sm:text-2xl">
-        Samrāya Guest Enquiry
+        <span className="font-samraya tracking-normal">Samrāya</span> Guest
+        Enquiry
       </h3>
 
       <form className="mt-8 space-y-5" onSubmit={handleSubmit} noValidate>

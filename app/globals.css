@@ -1,13 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&family=Forum&display=swap");
+/* Cormorant + Source Sans 3 include Latin Extended (ā). Adobe Devanagari for brand. */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:ital,wght@0,200..700;1,200..700&display=swap");
 @import "tailwindcss";
 
 /* Adobe Devanagari Regular via Typekit kit olu4rxt — loaded in layout.tsx */
 
 @theme inline {
-  --font-heading: "Forum", Georgia, serif;
-  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-samraya: "adobe-devanagari", sans-serif;
-  --font-tagline: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-heading: "Cormorant Garamond", "Times New Roman", serif;
+  --font-body: "Source Sans 3", "Helvetica Neue", system-ui, sans-serif;
+  --font-samraya: "adobe-devanagari", "Cormorant Garamond", serif;
+  --font-tagline: "Source Sans 3", "Helvetica Neue", system-ui, sans-serif;
   --color-charcoal: #111111;
   --color-gold: #c6a86a;
   --color-border: #e5e7eb;
@@ -25,10 +26,14 @@ body {
   background: #ffffff;
   color: #111111;
   font-family: var(--font-body);
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
 }
 
 .font-heading {
   font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .font-body {
@@ -39,6 +44,7 @@ body {
   font-family: var(--font-samraya);
   font-weight: 400;
   font-style: normal;
+  font-feature-settings: "kern" 1;
 }
 
 .font-tagline {
