@@ -80,12 +80,12 @@ export const FOOTER_SOCIAL = [
   {
     label: "Instagram",
     icon: "instagram" as const,
-    href: "https://www.instagram.com/ghdhotels/",
+    href: "https://www.instagram.com/samrayaresort/",
   },
   {
     label: "Facebook",
     icon: "facebook" as const,
-    href: "https://www.facebook.com/profile.php?id=61590444132512",
+    href: "https://www.facebook.com/samrayahotels",
   },
   {
     label: "X",
