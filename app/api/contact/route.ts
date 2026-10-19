@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { isMailConfigured, missingMailHint, sendAppMail } from "@/lib/sendMail";
 
+export const runtime = "nodejs";
+
 type ContactPayload = {
   name?: string;
   phone?: string;
@@ -13,6 +15,8 @@ type ContactPayload = {
 };
 
 const DEFAULT_RECIPIENT = "website@ghdhotels.in";
+const CLIENT_SEND_ERROR =
+  "We could not send your enquiry right now. Please try again in a moment.";
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -29,7 +33,15 @@ function recipient(): string {
 
 export async function POST(request: Request) {
   try {
-    const body = (await request.json()) as ContactPayload;
+    let body: ContactPayload;
+    try {
+      body = (await request.json()) as ContactPayload;
+    } catch {
+      return NextResponse.json(
+        { ok: false, error: "Invalid request." },
+        { status: 400 },
+      );
+    }
 
     const name = String(body.name ?? "").trim();
     const phone = String(body.phone ?? "").trim();
@@ -55,13 +67,10 @@ export async function POST(request: Request) {
     }
 
     if (!isMailConfigured()) {
+      console.error("Samrāya contact form: mail not configured", missingMailHint());
       return NextResponse.json(
-        {
-          ok: false,
-          error: "Email not configured",
-          hint: missingMailHint(),
-        },
-        { status: 400 },
+        { ok: false, error: CLIENT_SEND_ERROR },
+        { status: 503 },
       );
     }
 
@@ -95,30 +104,10 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true, source: "samraya" });
   } catch (error) {
-    if (
-      error instanceof Error &&
-      (/Missing SMTP_PASS/i.test(error.message) ||
-        /Missing RESEND_API_KEY/i.test(error.message) ||
-        /Email not configured/i.test(error.message))
-    ) {
-      return NextResponse.json(
-        {
-          ok: false,
-          error: "Email not configured",
-          hint: missingMailHint(),
-        },
-        { status: 400 },
-      );
-    }
-
-    const msg =
-      error instanceof Error
-        ? error.message
-        : typeof error === "string"
-          ? error
-          : "Failed to send email";
-
     console.error("Samrāya contact form error:", error);
-    return NextResponse.json({ ok: false, error: msg }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, error: CLIENT_SEND_ERROR },
+      { status: 500 },
+    );
   }
 }

@@ -16,6 +16,9 @@ const INTEREST_OPTIONS = [
 
 const GUEST_OPTIONS = ["1", "2", "3", "4", "5", "6+"] as const;
 
+const SEND_ERROR_MESSAGE =
+  "We could not send your enquiry right now. Please try again in a moment.";
+
 type FormState = {
   name: string;
   phone: string;
@@ -52,6 +55,31 @@ function formatGuests(value: string) {
   return `${value} guests`;
 }
 
+function parseJsonBody(raw: string): {
+  ok?: boolean;
+  error?: string;
+  hint?: string;
+} | null {
+  const trimmed = raw.trim();
+  if (!trimmed.startsWith("{")) return null;
+  try {
+    return JSON.parse(trimmed) as {
+      ok?: boolean;
+      error?: string;
+      hint?: string;
+    };
+  } catch {
+    return null;
+  }
+}
+
+function isHtmlResponse(raw: string, contentType: string) {
+  const type = contentType.toLowerCase();
+  if (type.includes("text/html")) return true;
+  const head = raw.slice(0, 80).toLowerCase();
+  return head.includes("<!doctype") || head.includes("<html");
+}
+
 export function GuestInterestForm() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
@@ -68,6 +96,7 @@ export function GuestInterestForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    event.stopPropagation();
 
     if (
       !form.name.trim() ||
@@ -92,6 +121,9 @@ export function GuestInterestForm() {
     setStatus("loading");
     setErrorMessage("");
 
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 45_000);
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -106,19 +138,26 @@ export function GuestInterestForm() {
           message: form.message.trim(),
           source: "samraya",
         }),
+        signal: controller.signal,
       });
 
-      const data = (await response.json().catch(() => ({}))) as {
-        ok?: boolean;
-        error?: string;
-        hint?: string;
-      };
+      const raw = await response.text();
+      const contentType = response.headers.get("content-type") || "";
+      const data = parseJsonBody(raw) ?? {};
 
-      if (!response.ok || data.ok !== true) {
+      if (
+        !response.ok ||
+        data.ok !== true ||
+        isHtmlResponse(raw, contentType)
+      ) {
+        console.error("Samrāya enquiry send failed:", {
+          status: response.status,
+          error: data.error,
+        });
         setErrorMessage(
-          data.error ||
-            data.hint ||
-            "Something went wrong. Please try again.",
+          data.error && !/smtp|resend|formsubmit|timeout|dns/i.test(data.error)
+            ? data.error
+            : SEND_ERROR_MESSAGE,
         );
         setStatus("error");
         return;
@@ -126,9 +165,20 @@ export function GuestInterestForm() {
 
       setForm(initialForm);
       setStatus("success");
-    } catch {
-      setErrorMessage("Something went wrong. Please try again.");
+    } catch (error) {
+      console.error("Samrāya enquiry send failed:", error);
+      const aborted =
+        error instanceof DOMException
+          ? error.name === "AbortError"
+          : error instanceof Error && /aborted|timeout/i.test(error.message);
+      setErrorMessage(
+        aborted
+          ? "The request timed out. Please try again."
+          : SEND_ERROR_MESSAGE,
+      );
       setStatus("error");
+    } finally {
+      window.clearTimeout(timeoutId);
     }
   }
 
@@ -152,7 +202,10 @@ export function GuestInterestForm() {
         </p>
         <button
           type="button"
-          onClick={() => setStatus("idle")}
+          onClick={() => {
+            setErrorMessage("");
+            setStatus("idle");
+          }}
           className="mt-6 h-10 border border-charcoal bg-white px-6 font-body text-[0.65rem] font-medium uppercase tracking-[0.1em] text-charcoal transition-colors hover:bg-charcoal hover:text-white"
         >
           Send another enquiry
@@ -168,7 +221,13 @@ export function GuestInterestForm() {
         Enquiry
       </h3>
 
-      <form className="mt-8 space-y-5" onSubmit={handleSubmit} noValidate>
+      <form
+        className="mt-8 space-y-5"
+        method="post"
+        action="#contact"
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <div>
           <label className={labelClass} htmlFor="guest-name">
             Name *
