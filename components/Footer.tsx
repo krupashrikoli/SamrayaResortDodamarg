@@ -6,7 +6,7 @@ import {
   GHD_CORPORATE_SITE,
   GHD_LOGO,
   NIVAARA_LOGO,
-  SAMRAYA_HOTEL_LOGO,
+  SAMRAYA_LIFESTYLE_LOGO,
 } from "@/lib/constants";
 
 type IconProps = {
@@ -156,21 +156,21 @@ export function Footer({ className }: { className?: string }) {
             />
 
             <div
-              className="flex w-full max-w-[22rem] flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:w-auto sm:max-w-[28rem] sm:gap-x-5 md:max-w-none md:gap-x-6"
+              className="flex w-full max-w-[24rem] flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:w-auto sm:max-w-[34rem] sm:gap-x-5 md:max-w-none md:gap-x-6"
               aria-label="GHD Hotels brands"
             >
               <Link
                 href="/"
-                className={brandLinkClass}
-                aria-label="Samrāya by GHD Hotels"
+                className="inline-flex h-9 max-w-[13.5rem] shrink items-center justify-center opacity-90 transition-opacity duration-300 touch-manipulation hover:opacity-100 sm:h-10 sm:max-w-[16rem] md:h-11 md:max-w-[18rem]"
+                aria-label="Samrāya Lifestyle & Wellness Resort"
               >
                 <Image
-                  src={SAMRAYA_HOTEL_LOGO}
-                  alt="Samrāya — A unit of GHD Hotels"
-                  width={2171}
-                  height={724}
+                  src={SAMRAYA_LIFESTYLE_LOGO}
+                  alt="Samrāya Lifestyle & Wellness Resort"
+                  width={3085}
+                  height={565}
                   className={brandImageClass}
-                  sizes="(max-width: 640px) 42vw, 160px"
+                  sizes="(max-width: 640px) 54vw, 288px"
                 />
               </Link>
 

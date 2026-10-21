@@ -12,7 +12,7 @@ import { getDefaultBookingHref } from "@/lib/booking";
 import { CORPORATE_NAV } from "@/lib/corporate-content";
 import {
   NAV_ITEMS,
-  SAMRAYA_HOTEL_LOGO,
+  SAMRAYA_LIFESTYLE_LOGO,
   SITE,
 } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -47,10 +47,10 @@ type HeaderLogos = {
 
 function getHeaderLogos(_isCorporate: boolean): HeaderLogos {
   return {
-    transparent: SAMRAYA_HOTEL_LOGO,
-    sticky: SAMRAYA_HOTEL_LOGO,
+    transparent: SAMRAYA_LIFESTYLE_LOGO,
+    sticky: SAMRAYA_LIFESTYLE_LOGO,
     homeHref: "/",
-    alt: "Samrāya — A unit of GHD Hotels",
+    alt: "Samrāya Lifestyle & Wellness Resort",
     transparentClassName: "object-contain object-center",
     stickyClassName: "object-contain object-center",
   };
@@ -345,7 +345,7 @@ function LogoLink({
         alt={logos.alt}
         fill
         className={imageClass}
-        sizes="(max-width: 768px) 120px, 240px"
+        sizes="(max-width: 768px) 200px, 320px"
         priority
       />
     </Link>
@@ -375,9 +375,7 @@ function TransparentHeaderContent({
             logos={logos}
             variant="transparent"
             className={cn(
-              isCorporate
-                ? "h-9 w-[9.5rem] sm:h-10 sm:w-[11rem]"
-                : "h-9 w-[6.75rem] sm:h-10 sm:w-[7.75rem]",
+              "h-8 w-[13.5rem] sm:h-9 sm:w-[15rem]",
               isCorporate && "mx-auto",
             )}
           />
@@ -410,7 +408,7 @@ function TransparentHeaderContent({
           <LogoLink
             logos={logos}
             variant="transparent"
-            className="h-10 w-[10rem] sm:h-11 sm:w-[12rem] md:h-12 md:w-[13.5rem] lg:h-[3.75rem] lg:w-[15rem]"
+            className="h-10 w-[16.5rem] sm:h-11 sm:w-[18rem] md:h-12 md:w-[20rem] lg:h-[3.5rem] lg:w-[22rem]"
           />
         </div>
       ) : (
@@ -425,7 +423,7 @@ function TransparentHeaderContent({
           <LogoLink
             logos={logos}
             variant="transparent"
-            className="h-10 w-[8rem] justify-self-center sm:h-11 sm:w-[9rem] md:h-12 md:w-[10rem] lg:h-[3.75rem] lg:w-[11rem]"
+            className="h-10 w-[16.5rem] justify-self-center sm:h-11 sm:w-[18rem] md:h-12 md:w-[20rem] lg:h-[3.5rem] lg:w-[22rem]"
           />
 
           <div className={cn("flex flex-col items-end justify-self-end leading-snug", contactClass(false))}>
@@ -479,7 +477,7 @@ function StickyHeaderContent({
           <LogoLink
             logos={logos}
             variant="sticky"
-            className="h-9 w-[10rem] sm:h-10 sm:w-[12rem]"
+            className="h-8 w-[13.5rem] sm:h-9 sm:w-[15.5rem]"
           />
           {showCorporateNav ? (
             <MobileMenuButton
@@ -496,7 +494,7 @@ function StickyHeaderContent({
             <LogoLink
               logos={logos}
               variant="sticky"
-              className="h-9 w-[10rem] sm:h-10 sm:w-[12rem]"
+              className="h-8 w-[13.5rem] sm:h-9 sm:w-[15.5rem]"
             />
             <div className="flex items-center gap-2 sm:gap-3">
               <a
@@ -523,7 +521,7 @@ function StickyHeaderContent({
             <LogoLink
               logos={logos}
               variant="sticky"
-              className="h-9 w-[10rem] sm:h-10 sm:w-[12rem] md:h-11 md:w-[14rem]"
+              className="h-9 w-[15.5rem] sm:h-10 sm:w-[17rem] md:h-11 md:w-[19rem]"
             />
           </div>
           {showCorporateNav ? (
@@ -543,7 +541,7 @@ function StickyHeaderContent({
             <LogoLink
               logos={logos}
               variant="sticky"
-              className="pointer-events-auto h-9 w-[10rem] sm:h-10 sm:w-[12rem] md:h-11 md:w-[13.5rem] lg:w-[15rem]"
+              className="pointer-events-auto h-9 w-[15.5rem] sm:h-10 sm:w-[17rem] md:h-11 md:w-[19rem] lg:w-[21rem]"
             />
 
             <div className="pointer-events-auto flex items-center gap-2 sm:gap-3 md:hidden">

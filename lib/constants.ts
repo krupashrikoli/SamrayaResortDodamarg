@@ -6,6 +6,8 @@ export const CELESTRA_LOGO = "/logos/celestra-by-ghd-hotels-logo.webp";
 export const SAMRAYA_LOGO = "/logos/samraya-by-ghd-hotels-logo.webp";
 /** Primary Samrāya lockup for the title menu bar. */
 export const SAMRAYA_HOTEL_LOGO = "/logos/samraya-hotel-logo.png";
+/** Full Samrāya Lifestyle & Wellness Resort lockup (footer brand row). */
+export const SAMRAYA_LIFESTYLE_LOGO = "/logos/samraya-lifestyle-logo.png";
 /** Centered hero wordmark (no emblem). */
 export const SAMRAYA_WORDMARK = "/logos/samraya-wordmark.png";
 /** Centered hero — Opening Soon lockup. */
