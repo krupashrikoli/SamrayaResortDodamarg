@@ -5,7 +5,15 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Samrāya | Lifestyle & Wellness Resort",
-  description: "Lifestyle and Wellness Resort — by GHD Hotels. Deployed at samraya.ghdhotels.in",
+  description:
+    "Lifestyle and Wellness Resort — by GHD Hotels. Deployed at samraya.ghdhotels.in",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icons/samraya-icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({
