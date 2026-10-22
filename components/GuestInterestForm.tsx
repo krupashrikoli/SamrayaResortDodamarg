@@ -192,7 +192,7 @@ export function GuestInterestForm() {
         <p className="font-body text-[0.7rem] font-medium uppercase tracking-[0.2em] text-black">
           Message sent
         </p>
-        <h3 className="mt-3 font-heading text-xl text-charcoal sm:text-2xl">
+        <h3 className="mt-3 font-heading text-xl font-semibold text-charcoal sm:text-2xl">
           Thank you
         </h3>
         <p className="mt-3 font-body text-sm font-light leading-relaxed text-[#6b7280]">
@@ -216,7 +216,7 @@ export function GuestInterestForm() {
 
   return (
     <div className="border border-[#E5E5E5] bg-white p-6 shadow-[0_8px_30px_rgba(17,17,17,0.06)] sm:p-8">
-      <h3 className="font-heading text-xl text-charcoal sm:text-2xl">
+      <h3 className="font-heading text-xl font-semibold text-charcoal sm:text-2xl">
         <span className="font-samraya tracking-normal">Samrāya</span> Guest
         Enquiry
       </h3>
